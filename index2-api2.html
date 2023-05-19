@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        body{
+            background-color: rgb(247, 247, 247);
+        }
+        article{
+            position: relative;
+            /* width: 300px; */
+            height: 430px;
+            background-color: white;
+            /* border: 1px solid rgb(206, 200, 200); */
+        }
+        article:hover .price{
+            transform: translateY(-10px);
+        }
+        img{
+            width: 200px;
+            height: 200px;
+            transition: 0.4s;
+        }
+        figure{
+            transition: .04s;
+        }
+        figure:hover> img{
+            transform: scale(1.1);
+        }
+        #time{
+            flex-wrap: wrap;
+            width: 1000px;
+        }
+        button{
+        position: absolute;
+        bottom: 15px;
+        left: 20px;
+        border: 1px solid gray;
+        font-size: 15px;
+        transition: .4s;
+
+        }
+        button:hover {
+            background-color: black;
+            color: white;
+        }
+        .price{
+            width: 70px;
+            height: 25px;
+            background-color: red;
+            border-radius: 7px;
+            color: white;
+            font-size: 15px;
+            transition: .4s;
+        }
+        .about{
+            font-size: 12px;
+        }
+        .fig{
+            border-bottom: 2px solid rgb(158, 157, 157);
+        }
+        .wel{
+            text-transform: uppercase;
+            background-color: rgb(19, 100, 80);
+            color: white;
+            /* border: 1px solid rgb(71, 71, 71); */
+            /* padding: 5px; */
+            font-size: 23px;
+            -webkit-text-stroke: 2px black;
+        }
+    </style>
+</head>
+<body>
+    <div class="container shop " onmousemove="piu(event)">
+        <div class="row justify-content-center m-2">
+            <div class="col-12 d-flex justify-content-center align-item-center" id="time">
+                <div class="col-12 d-flex justify-content-center align-item-center wel mb-2">
+                    <h3>Welcome to eightcollection</h3>
+                </div>
+        </div>
+        </div>
+    </div>
+    <script>
+        fetch('https://fakestoreapi.com/products')
+            .then(res=>res.json())
+            .then(mydata=>{
+                mydata.map(function(val){
+                let _art=document.createElement('article')
+                _art.classList.add('col-4', 'border', 'border-1', 'p-2')
+                _art.innerHTML=`
+                <figcaption class='d-flex justify-content-center align-item-center m-2 fig'><h6>${val.category}</h6></figcaption>
+                <figure class='d-flex justify-content-center align-item-center m-4'>
+                <img src="${val.image}" alt="">
+                </figure>
+                <section class='m-4'>
+                    <h5 class='price p-1 d-flex justify-content-center align-item-center'>${val.price} $</h5>
+                    <p class='about'>${val.title}</p>
+                </section>
+                <button>shopnow ></button>
+                `
+                document.getElementById('time').appendChild(_art)
+            })
+
+        })
+        </script>
+</body>
+</html>
